@@ -456,7 +456,7 @@ def create_versioning_trigger_listeners(manager, cls):
     )
 
 
-def sync_trigger(conn, table_name):
+def sync_trigger(conn, table_name, use_property_mod_tracking=False):
     """
     Synchronizes versioning trigger for given table with given connection.
 
@@ -489,7 +489,7 @@ def sync_trigger(conn, table_name):
         set(c.name for c in version_table.c if not c.name.endswith('_mod'))
     )
     drop_trigger(conn, parent_table.name)
-    create_trigger(conn, table=parent_table, excluded_columns=excluded_columns)
+    create_trigger(conn, table=parent_table, excluded_columns=excluded_columns, use_property_mod_tracking=use_property_mod_tracking)
 
 
 def create_trigger(
@@ -499,7 +499,7 @@ def create_trigger(
     operation_type_column_name='operation_type',
     version_table_name_format='%s_version',
     excluded_columns=None,
-    use_property_mod_tracking=True,
+    use_property_mod_tracking=False,
     end_transaction_column_name=None,
 ):
     params = dict(

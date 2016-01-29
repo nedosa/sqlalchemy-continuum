@@ -1,4 +1,4 @@
-from .activity import ActivityPlugin
+from .pmactivity import ActivityPlugin
 from .base import Plugin, PluginCollection
 from .flask import FlaskPlugin
 from .null_delete import NullDeletePlugin
