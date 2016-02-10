@@ -249,8 +249,9 @@ class ActivityFactory(ModelFactory):
             target_tx_id = sa.Column(sa.BigInteger)
 
             def __repr__(self):
-                return "<Activity[{}] txn:{} object:{} target:{} data:{}>".format(
-                    self.id, self.transaction, self.object, self.target, self.data
+                return "<Activity[{}] txn:{} verb:{} object:{} target:{} data:{}>".format(
+                    self.id, self.transaction, self.verb,
+                    self.object, self.target, self.data
                 )
 
             def _calculate_tx_id(self, obj):
