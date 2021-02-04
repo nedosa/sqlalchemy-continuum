@@ -123,7 +123,11 @@ class SQLConstruct(object):
             self.update_validity_for_tables = []
         if self.excluded_columns is None:
             self.excluded_columns = []
-        self.excluded_columns.append('xmin')
+        if 'xmin' not in self.excluded_columns:
+            if type(self.excluded_columns) is list:
+                self.excluded_columns.append('xmin')
+            elif type(self.excluded_columns) is set:
+                self.excluded_columns.add('xmin')
 
     @property
     def table_name(self):
